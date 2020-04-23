@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+ 
+<!-- Hibernate session factory -->
+<bean id="sessionFactory" 
+    class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+ 
+    <property name="dataSource">
+      <ref bean="dataSource"/>
+    </property>
+    
+     
+    <property name="hibernateProperties">
+       <props>
+          <!-- <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>  -->
+          <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>  
+          
+        <prop key="hibernate.show_sql">true</prop>
+         <!-- <prop key="hibernate.hbm2ddl.auto">update</prop> -->
+<!--          <prop key="cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>  
+         <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>   -->
+<!--          <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory</prop>
+		<prop key="hibernate.cache.provider_configuration_file_resource_path">ehcache.xml</prop>
+ -->
+ <prop key="net.sf.ehcache.configurationResourceName">ehcache.xml</prop>
+<!-- 		<prop key="hibernate.cache.use_second_level_cache">true</prop>
+		<prop key="hibernate.cache.use_query_cache">true</prop>
+ -->		
+		<prop key="hibernate.cache.use_second_level_cache">true</prop> 
+<prop key="hibernate.cache.use_query_cache">true</prop> 
+ <prop key="hibernate.cache.provider_class"> 
+     net.sf.ehcache.hibernate.EhCacheProvider</prop>
+     <prop key="hibernate.generate_statistics">true</prop>
+       </props>
+    </property>
+ 	
+    <property name="mappingResources">
+		<list>
+		
+		  <value>resources/com/core/hibernate/hbm/EmpLoginInfo.hbm.xml</value>
+          <value>resources/com/core/hibernate/hbm/Employee.hbm.xml</value>
+          <value>resources/com/core/hibernate/hbm/Manpower.hbm.xml</value>
+          <value>resources/com/core/hibernate/hbm/ChallengeMaster.hbm.xml</value>
+          <value>resources/com/core/hibernate/hbm/ApplicationSettings.hbm.xml</value>
+          <value>resources/com/core/hibernate/hbm/IdeaMaster.hbm.xml</value>
+          <value>resources/com/core/hibernate/hbm/ChallengePoints.hbm.xml</value>
+          <value>resources/com/core/hibernate/hbm/CompanyMaster.hbm.xml</value>
+          <value>resources/com/core/hibernate/hbm/PlantMaster.hbm.xml</value>
+          <value>resources/com/core/hibernate/hbm/DepartmentMaster.hbm.xml</value>
+          <value>resources/com/core/hibernate/hbm/DesignationMaster.hbm.xml</value>
+          <value>resources/com/core/hibernate/hbm/ChallengeTeam.hbm.xml</value>
+          <value>resources/com/core/hibernate/hbm/TeamMembers.hbm.xml</value>
+		</list>
+    </property>	
+ 
+</bean>
+</beans>

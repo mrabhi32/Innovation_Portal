@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<beans xmlns="http://www.springframework.org/schema/beans"    
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:aop="http://www.springframework.org/schema/aop"    
+xmlns:context="http://www.springframework.org/schema/context" 
+xmlns:tx="http://www.springframework.org/schema/tx"    
+xmlns:p="http://www.springframework.org/schema/p" 
+xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd      
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context-3.0.xsd      
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">       
+
+	<context:annotation-config />       
+      <context:component-scan base-package="com.vgil" /> 
+      <context:component-scan base-package="com.core" /> 
+      <context:component-scan base-package="com.core.action.login" /> 
+
+	<!-- Database Configuration -->
+	<import resource="config/spring/DataSource.xml"/>
+	<import resource="config/spring/HibernateSessionFactory.xml"/>
+ 
+ 	<!-- Apache Shiro Authentication -->
+ 
+<!--  	<import resource="com/core/auth/authBean.xml"/>
+ --> 
+
+ 
+ 	<!-- Email Support -->
+ <!--  	<import resource="classpath*:/com/core/spring/ManPowerBean.xml"/>
+ 	<import resource="classpath*:/com/core/spring/MailBean.xml"/>
+ 	<import resource="classpath*:/com/core/spring/EmployeeBean.xml"/>
+ 	<import resource="classpath*:/com/core/spring/UserBean.xml"/>
+ 	<import resource="classpath*:/com/core/spring/ChallengeBankBean.xml"/>
+ 	<import resource="classpath*:/META-INF/utils/spring/email/EmailSupportBean.xml"/> 
+ 	<import resource="classpath*:/META-INF/com/core/spring/ApplicationSettingsBean.xml"/>
+ -->
+ 
+ 	<bean id="applicationSettingsBo" class="com.core.bo.impl.ApplicationSettingsBoImpl" >
+		<property name="applicationSettingsDAO" ref="applicationSettingsDAO" />
+	</bean>
+	
+   	<bean id="applicationSettingsDAO" class="com.core.dao.impl.ApplicationSettingsDAOImpl" >
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+			
+	<bean id="challengeBankBo" class="com.vgil.bo.impl.ChallengeBankBOImpl" >
+		<property name="challengeBankDAO" ref="challengeDao" />
+		<property name="applicationSettingsBo" ref="applicationSettingsBo" />
+	</bean>
+	
+   	<bean id="challengeDao" class="com.vgil.dao.impl.ChallengeBankDAOImpl" >
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="employeeBO" class="com.vgil.bo.impl.EmployeeBOImpl" >
+		<property name="employeeDAO" ref="employeeDAO" />
+		<property name="applicationSettingsBo" ref="applicationSettingsBo" />
+	</bean>
+	
+   	<bean id="employeeDAO" class="com.vgil.dao.impl.EmployeeDAOImpl" >
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	 	<bean id="mail" class="com.core.utils.email.Mail" />
+
+ 	<bean id="mailService" class="com.core.utils.email.MailService" >
+		<property name="mailBo" ref="mailBo" />
+ 	</bean>
+	<bean id="mailBo" class="com.core.bo.impl.MailBOImpl" >
+		<property name="mailDao" ref="mailDao" />
+	</bean>
+	
+   	<bean id="mailDao" class="com.core.dao.impl.MailDAOImpl" >
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="manPowerBo" class="com.vgil.bo.impl.ManPowerBoImpl" >
+		<property name="manPowerDAO" ref="manPowerDAO" />
+	</bean>
+   	<bean id="manPowerDAO" class="com.vgil.dao.impl.ManPowerDAOImpl" >
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="loginBo" class="com.core.bo.impl.LoginBoImpl" >
+		<property name="loginDAO" ref="loginDAO" />
+	</bean>
+   	<bean id="loginDAO" class="com.core.dao.impl.LoginDAOImpl" >
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+ 
+  	<bean id="loginAction"  class="com.vgil.action.InnovationLoginAction" scope="prototype">
+		<property name="loginBo" ref="loginBo" />
+		<property name="applicationSettingsBo" ref="applicationSettingsBo" />
+		<property name="employeeBO" ref="employeeBO" />
+	</bean>	
+  	<bean id="challengeAction"  class="com.vgil.action.ChallengeAction" scope="prototype">
+		<property name="challengeBankBO" ref="challengeBankBo" />
+	</bean>	
+  	<bean id="reportAction"  class="com.vgil.action.ReportAction" scope="prototype">
+		<property name="bankBO" ref="challengeBankBo" />
+		<property name="employeeBO" ref="employeeBO" />
+		<property name="applicationSettingsBo" ref="applicationSettingsBo" />
+	</bean>
+  	<bean id="dashboardAction"  class="com.vgil.action.DashboardAction" scope="prototype">
+		<property name="challengeBankBo" ref="challengeBankBo" />
+		<property name="manPowerBo" ref="manPowerBo" />
+		<property name="employeeBo" ref="employeeBO" />
+	</bean>	
+  	<bean id="editAction"  class="com.vgil.action.EditAction" scope="prototype">
+		<property name="challengeBankBo" ref="challengeBankBo" />
+		<property name="applicationSettingsBo" ref="applicationSettingsBo" />
+		<property name="manpowerBo" ref="manPowerBo" />
+		<property name="employeeBo" ref="employeeBO" />
+	</bean>	
+  	<bean id="applicationSettingsAction"  class="com.core.action.login.ApplicationSettingsAction" scope="prototype">
+		<property name="challengeBankBO" ref="challengeBankBo" />
+	</bean>	
+
+  	<bean id="formSetupAction"  class="com.vgil.action.FormSetupAction" scope="prototype">
+  		<property name="challengeBankBO" ref="challengeBankBo" />
+  	</bean>	
+  	
+  	<bean id="pursueChallenge"  class="com.vgil.action.ChallengeAction" scope="prototype">
+  		<property name="challengeBankBO" ref="challengeBankBo" />
+  	</bean>	
+
+<!--  	<import resource="classpath*:/META-INF/com/core/spring/Action.xml"/> -->
+ 	<!-- Email Support Ends-->
+	 
+</beans>

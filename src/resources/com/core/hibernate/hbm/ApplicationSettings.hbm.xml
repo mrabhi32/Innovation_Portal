@@ -1,0 +1,28 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 20 Julai 2010 11:40:18 AM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.vgil.model.ApplicationSettings" 
+		table="APPLICATION_SETTINGS" lazy="false">
+        <cache usage="read-write"/>
+        <id name="serial_no" type="int">
+			<column name="serial_no" />
+			<generator class="identity" />
+		</id>
+        <property name="codeType" type="string">
+            <column name="code_type" length="50" />
+        </property>
+        <property name="code" type="string">
+            <column name="code" length="50" />
+        </property>
+        <property name="value" type="string">
+            <column name="code_value" length = "50" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length = "50" />
+        </property>
+        <property name="comments" type="string">
+            <column name="comments" length = "50" />
+        </property>
+    </class>
+</hibernate-mapping>

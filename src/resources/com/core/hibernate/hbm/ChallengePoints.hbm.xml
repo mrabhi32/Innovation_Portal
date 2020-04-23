@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.vgil.model.ChallengePoints" table="CHALLENGE_POINTS"
+		lazy="false">
+		<cache usage="read-write" />
+		<id name="serial_no" type="int">
+			<column name="serial_no" />
+			<generator class="identity" />
+		</id>
+
+		<property name='idea_id' type='string'>
+			<column name='idea_id' length='10' />
+		</property>
+		<property name='user_id' type='string'>
+			<column name='user_id' length='10' />
+		</property>
+		<property name='challenge_id' type='string'>
+			<column name='challenge_id' length='10' />
+		</property>
+		<property name='persue_points' type='int'>
+			<column name='persue_points' />
+		</property>
+		<property name='idea_generation_points' type='int'>
+			<column name='idea_generation_points' />
+		</property>
+		<property name='prototype_points' type='int'>
+			<column name='prototype_points' />
+		</property>
+		<property name='scaleup_points' type='int'>
+			<column name='scaleup_points' />
+		</property>
+		<property name='total_points' type='int'>
+			<column name='total_points' />
+		</property>
+		<property name='Created_date' type='timestamp'>
+			<column name='Created_date' />
+		</property>
+		<property name='created_by' type='string'>
+			<column name='created_by' length='10' />
+		</property>
+		<property name='last_updated_date' type='timestamp'>
+			<column name='last_updated_date' />
+		</property>
+		<property name='last_updated_by' type='string'>
+			<column name='last_updated_by' length='10' />
+		</property>
+
+
+
+
+
+	</class>
+</hibernate-mapping>

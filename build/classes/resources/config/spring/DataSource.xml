@@ -1,0 +1,61 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+ 
+<!--   <bean 
+   class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+   <property name="location">
+     <value>WEB-INF/classes/config/database/properties/database.properties</value>
+   </property>
+</bean>  -->
+ 
+   <!-- <bean id="dataSource" 
+         class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<property name="driverClassName" value="org.hsqldb.jdbcDriver" />
+	<property name="url" value="jdbc:hsqldb:hsql://localhost" />
+	<property name="username" value="SA" />
+	<property name="password" value="" />
+  </bean>   -->
+
+   <!-- MySql --> 
+   <!-- Anand test server -->
+   <!-- <bean id="dataSource" 
+         class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+	<property name="url" value="jdbc:mysql://localhost:3306/innovation" />
+	<property name="username" value="root" />
+	<property name="password" value="C27GBPHkx4c$" />
+  </bean> -->  
+  
+  <!-- deployment -->
+<!--             <bean id="dataSource" 
+         class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+	<property name="url" value="jdbc:mysql://127.12.222.2:3306/apps"/>
+	<property name="username" value="adminuPuRmfg" />
+	<property name="password" value="PPITFvhUGP4h" />
+  </bean>    -->  
+  
+  <!-- local -->
+<!--    <bean id="dataSource" 
+         class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+	<property name="url" value="jdbc:mysql://127.0.0.1:60184/apps"/>
+	<property name="username" value="adminuPuRmfg" />
+	<property name="password" value="PPITFvhUGP4h" />
+  </bean>   -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/innovation_portal" />
+		<property name="username" value="root" />
+		<property name="password" value="admin" />  
+	</bean>  
+	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/innovation" />
+		<property name="username" value="root" />
+		<property name="password" value="opiscool" />
+	</bean>   --> 
+	 
+</beans>

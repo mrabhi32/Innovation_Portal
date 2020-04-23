@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.xwork.chaining.copyErrors" value="true"/>
+	<constant name="struts.xwork.chaining.copyFieldErrors" value="true"/>
+	<constant name="struts.xwork.chaining.copyMessages" value="true"/>
+	<constant name="struts.configuration.xml.reload" value="true"/>
+	<package name="default" namespace="/apps/jsp"
+		extends="struts-default,json-default,jfreechart-default">
+
+
+
+		<result-types>
+			<result-type name="json" class="org.apache.struts2.json.JSONResult"
+				default="true" />
+			<result-type name="dispatcher"
+				class="org.apache.struts2.dispatcher.ServletDispatcherResult"
+				default="true" />
+		</result-types>
+		<interceptors>
+		 <interceptor name="sessionCheckInterceptor"
+				class="com.core.interceptors.SessionCheckInterceptor" />
+			<interceptor name="toolBarInterceptor"
+				class="com.vgil.interceptor.ToolBarInterceptor" />
+				
+			<interceptor-stack name="vgilStack">
+				<interceptor-ref name="toolBarInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+
+			<interceptor-stack name="vgilSessionCheckStack">
+			 <interceptor-ref name="sessionCheckInterceptor" /> 
+				<interceptor-ref name="toolBarInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+
+
+
+		</interceptors>
+		<default-interceptor-ref name="vgilSessionCheckStack"></default-interceptor-ref>
+
+		<global-results>
+			<result name="sessionExpired" type="redirect">sign-in.jsp</result>
+		</global-results>
+
+		<action name="registerUser" class="loginAction"
+			method="registerUser">
+			<interceptor-ref name="vgilStack"></interceptor-ref>
+			<result name="success">sign-in.jsp</result>
+			<result name="input">sign-up.jsp</result>
+			<result name="error">sign-up.jsp</result>
+			<result name="register">sign-up.jsp</result>
+		</action>
+		<action name="employeeUserRegistration" class="loginAction"
+			method="registerUser">
+			<result name="success">employeeSignUp.jsp</result>
+			<result name="input">employeeSignUp.jsp</result>
+			<result name="error">employeeSignUp.jsp</result>
+			<result name="register">employeeSignUp.jsp</result>
+		</action>
+		<action name="employeeUserRegisterData" class="loginAction"
+			method="setupUserRegisterData">
+			<result name="success">employeeSignUp.jsp</result>
+			<result name="input">employeeSignUp.jsp</result>
+			<result name="error">employeeSignUp.jsp</result>
+			<result name="register">employeeSignUp.jsp</result>
+		</action>
+		<action name="uploadEmployee" class="loginAction"
+			method="uploadEmployee">
+			<result name="success">uploadEmployee.jsp</result>
+			<result name="error">uploadEmployee.jsp</result>
+			<result name="input">uploadEmployee.jsp</result>
+		</action>
+		<action name="loginUser" class="loginAction"
+			method="login">
+			<interceptor-ref name="vgilStack"></interceptor-ref>
+			<!-- <result name="success">${targetPage}.jsp</result> -->
+			<result name="success" type="redirectAction">
+				<param name="actionName">${targetPage}</param>
+				<param name="method">setUpDashboard</param>
+			</result>
+			<result name="input">sign-in.jsp</result>
+			<result name="error">sign-in.jsp</result>
+		</action>
+		<action name="forgotPassword" class="loginAction"
+			method="passwordRecovery">
+			<interceptor-ref name="vgilStack"></interceptor-ref>
+			<result name="success">sign-in.jsp</result>
+			<result name="input">reset-password.jsp</result>
+			<result name="error">reset-password.jsp</result>
+		</action>
+
+		<action name="changePasswordAction" class="loginAction"
+			method="changePassword">
+<!-- 			<result name="success" type="redirectAction">
+				<param name="actionName">dashboardAction</param>
+				<param name="method">setUpDashboard</param>
+			</result>
+ -->			
+ 			<result name="success">changePassword.jsp</result>
+			<result name="input">changePassword.jsp</result>
+			<result name="error">changePassword.jsp</result>
+		</action>
+
+		<action name="uploadChallenge" class="challengeAction"
+			method="uploadChallenges">
+			<result name="success">uploadChallenge.jsp</result>
+			<result name="error">uploadChallenge.jsp</result>
+			<result name="input">uploadChallenge.jsp</result>
+		</action>
+		<action name="addIdea" class="challengeAction"
+			method="getChallengesForTeamSelection">
+			<result name="success">addIdea.jsp</result>
+			<result name="error">addIdea.jsp</result>
+			<result name="input">addIdea.jsp</result>
+		</action>
+		<action name="getSelectedChallenge" class="challengeAction"
+			method="saveIdeaForChallenge">
+			
+		</action>
+		<action name="getChallengesToChooseTeam" class="reportAction"
+			method="pursueChallenge">
+			<result name="success">pursueChallenge.jsp</result>
+			<result name="error">pursueChallenge.jsp</result>			
+		</action>
+		<!-- <action name="getSelectedChallengeForEmployee" class="challengeAction"
+			method="saveAsCurrentSelectedChallenge">
+			<result name="success">multiSelectEmployeeForChallenge.jsp</result>
+			<result name="error">multiSelectEmployeeForChallenge.jsp</result>
+			<result name="input">multiSelectEmployeeForChallenge.jsp</result>
+		</action> -->
+		<action name="saveIdea" class="challengeAction"
+			method="saveIdeaForChallenge">
+			<result name="success">addIdea.jsp</result>
+			<result name="error">addIdea.jsp</result>
+			<result name="input">addIdea.jsp</result>
+		</action>
+		<action name="ReportAction" class="reportAction"
+			method="getChallengeBank">
+			<result name="success" type="json">
+				<param name="root">gridConfig</param>
+			</result>
+		</action>
+		<action name="ReportAction" class="reportAction"
+			method="getChallengeList">
+			<result name="success" type="json">
+				<param name="root">report</param>
+			</result>
+		</action>
+		<action name="ReportAction" class="reportAction"
+			method="getPlants">
+			<result name="success" type="json">
+				<param name="root">report</param>
+			</result>
+		</action>
+		<action name="ReportAction" class="reportAction"
+			method="getChallengeListTest">
+			<result name="success" type="json">
+				<param name="root">report</param>
+			</result>
+		</action>
+		<action name="ChallengeIdeas" class="reportAction"
+			method="getChallengeIdeas">
+			<result name="success" type="json">
+				<param name="root">gridConfig</param>
+			</result>
+			<result name="error" type="json">
+				<param name="root">gridConfig</param>
+			</result>
+		</action>
+		<action name="getOpenChallengeIdeas" class="reportAction"
+			method="getOpenChallengeIdeas">
+			<result name="success" type="json">
+				<param name="root">gridConfig</param>
+			</result>
+			<result name="error" type="json">
+				<param name="root">gridConfig</param>
+			</result>
+		</action>
+		
+		<action name="ChallengePoints" class="reportAction"
+			method="getChallengePoints">
+			<result name="success" type="json">
+				<param name="root">gridConfig</param>
+			</result>
+			<result name="error" type="json">
+				<param name="root">gridConfig</param>
+			</result>
+		</action>
+
+		<action name="ReportAction" class="reportAction"
+			method="searchChallengeBank">
+			<result name="success" type="json">
+				<param name="root">gridConfig</param>
+			</result>
+		</action>
+		<action name="TrackChallenges" class="reportAction"
+			method="getCompanyChallenges">
+			<result name="success" type="json">
+				<param name="root">gridConfig</param>			
+			</result>
+		</action>
+		<action name="ReportAction" class="reportAction"
+			method="getUserList">
+			<result name="success" type="json">
+				<param name="root">gridConfig</param>
+			</result>
+		</action>
+		<action name="ReportAction" class="reportAction"
+			method="getUserListTest">
+			<result name="success" type="json">
+				<param name="root">gridConfig</param>
+			</result>
+		</action>
+		<action name="GetTeamMembers" class="reportAction"
+			method="getTeamMembers">
+			<result name="success" type="json">
+				<param name="root">gridConfig</param>
+			</result>
+		</action>
+
+		<action name="EditChallengeStatus" class="editAction" method="changeChallengeStatus">
+		<result name="success">trackChallenges.jsp</result>
+ 
+		</action>
+		<action name="TrackChallengeStatus" class="editAction" method="trackChallengeStatus">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			    <param name="includeProperties">
+			        actionErrors.*,
+			        actionMessages.*,
+			        fieldErrors.*
+			    </param>
+			    <param name="grid">gridConfig</param> 
+			    <param name="success" >successStatus</param>
+			</result>
+			 <result name="error" type="json">
+			 	<param name="ignoreHierarchy">false</param>
+			    <param name="includeProperties">
+			        actionErrors.*,
+			        actionMessages.*,
+			        fieldErrors.*
+			    </param>
+				<param name="error" >errorStatus</param>
+			</result> 
+		</action>
+		<action name="PickChallengeStatus" class="editAction" method="pickChallengeStatus">
+<!-- 			<interceptor-ref name="jsonValidationWorkflowStack"></interceptor-ref>  
+ -->			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			    <param name="includeProperties">
+			        actionErrors.*,
+			        actionMessages.*,
+			        fieldErrors.*
+			    </param>
+			    <param name="grid">gridConfig</param> 
+			    <param name="success" >successStatus</param>
+			</result>
+			 <result name="error" type="json">
+			 	<param name="ignoreHierarchy">false</param>
+			    <param name="includeProperties">
+			        actionErrors.*,
+			        actionMessages.*,
+			        fieldErrors.*
+			    </param>
+				<param name="error" >errorStatus</param>
+			</result> 
+		</action>
+		<action name="editIdea" class="editAction"
+			method="editIdea">
+			<interceptor-ref name="jsonValidationWorkflowStack"></interceptor-ref>  
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			    <param name="includeProperties">
+			        actionErrors.*,
+			        actionMessages.*,
+			        fieldErrors.*
+			    </param>
+			    <param name="grid">gridConfig</param> 
+			    <param name="success" >successStatus</param>
+			</result>
+			<result name="error" type="json">
+				<param name="ignoreHierarchy">false</param>
+			    <param name="includeProperties">
+			        actionErrors.*,
+			        actionMessages.*,
+			        fieldErrors.*
+			    </param>
+				<param name="error" >errorStatus</param>
+			</result>
+		</action>
+		<action name="EditIdeaStatus" class="editAction"
+			method="changeIdeaStatus">
+			<interceptor-ref name="jsonValidationWorkflowStack"></interceptor-ref>  
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			    <param name="includeProperties">
+			        actionErrors.*,
+			        actionMessages.*,
+			        fieldErrors.*
+			    </param>
+			    <param name="grid">gridConfig</param> 
+			    <param name="success" >successStatus</param>
+			</result>
+			<result name="error" type="json">
+				<param name="ignoreHierarchy">false</param>
+			    <param name="includeProperties">
+			        actionErrors.*,
+			        actionMessages.*,
+			        fieldErrors.*
+			    </param>
+				<param name="error" >errorStatus</param>
+			</result>
+		</action>
+
+		<action name="EditIEmployeeCapability" class="editAction"
+			method="editEmployee">
+			<interceptor-ref name="jsonValidationWorkflowStack"></interceptor-ref>  
+			<result name="error">editEmployee.jsp</result>
+		</action>
+		
+		<!-- <action name="EditAction" class="com.vgil.action.EditAction" method="changeChallengeStatus"> 
+			<result name="success" type="json"> <param name="root">gridConfig</param> 
+			</result> </action> -->
+		<action name="loginAction" class="loginAction"
+			method="login">
+			<result name="success" type="redirectAction">
+				<param name="actionName">dashboardAction</param>
+				<param name="method">setUpDashboard</param>
+			</result>
+			<result name="error">sign-in.jsp</result>
+		</action>
+		<action name="dashboardAction" class="dashboardAction">
+			<result name="successChallenge" type="redirectAction">
+			<param name="message">${message}</param>
+			<param name="actionName">challengeFormAction</param>
+			</result>
+			<result name="success">dashboard.jsp</result>
+			<result name="input">challengeFormAction</result>
+			<result name="error">challengeFormAction</result>
+		</action>
+		<action name="setUpPersonalTrackerDashboard" class="dashboardAction"
+			method="setUpPersonalTrackerDashboard">
+			<result name="success">personalTracker.jsp</result>
+			<result name="error">dashboard.jsp</result>
+		</action>
+		<action name="personalPointsTracker" class="reportAction"
+			method="personalPointsTracker">
+			<result name="success" type="json">
+				<param name="root">gridConfig</param>
+			</result>
+		</action>
+		<action name="challengeFormAction" class="formSetupAction"
+			method="SetUpChallengeForm">
+			<result name="success">createChallenge.jsp</result>
+			<result name="error">createChallenge.jsp</result>
+			<result name="input">createChallenge.jsp</result>
+		</action>
+		<action name="CreateTeamForChallenge" class="challengeAction"
+			method="createTeamForChallenge">
+			<result name="success">pickChallenges.jsp</result>
+			<result name="error">pickChallenges.jsp</result>			
+		</action>
+		
+		<action name="pursueChallenge" class="challengeAction"
+			method="pursueChallenge">
+			<result name="success">pickChallenges.jsp</result>
+			<result name="error">pickChallenges.jsp</result>			
+		</action>
+
+		<action name="pieChartAction" class="dashboardAction"
+			method="PieChart">
+			<result name="success">pieChart.jsp</result>
+			<result name="error">pieChart.jsp</result>
+			<result name="input">pieChart.jsp</result>
+		</action>
+
+		<action name="testpieChartAction" class="dashboardAction"
+			method="testPieChart">
+			<result name="success">testPieChart.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+
+		<action name="UploadAction" class="com.core.action.csvload.UploadAction"
+			method="uploadCVS">
+			<result name="success">uploadFile.jsp</result>
+		</action>
+
+		<action name="resultPieChart" class="dashboardAction"
+			method="loadPieChart">
+			<result name="success" type="json">
+				<param name="root">chart</param>
+			</result>
+
+		</action>
+
+		<action name="loadCategoryBasedPieChart" class="dashboardAction"
+			method="loadCategoryWisePieChart">
+			<result name="success" type="json">
+				<param name="root">chart</param>
+			</result>
+		</action>
+
+		<action name="uploadAppSettings" class="applicationSettingsAction"
+			method="uploadApplicationSettings">
+			<result name="success">uploadApplicationSetting.jsp</result>
+			<result name="error">uploadApplicationSetting.jsp</result>
+			<result name="input">uploadApplicationSetting.jsp</result>
+		</action>
+	<action name="getChallengeListPage" class="reportAction"
+			method="getChallengeListPage">
+			<result name="success">challengesList.jsp</result>
+	</action>
+		<action name="getChallengeEditListPage" class="reportAction"
+			method="getChallengeEditListPage">
+			<result name="success">challengesListEdit.jsp</result>
+	</action>
+		<action name="getIdeaListPage" class="reportAction"
+			method="getIdeaListPage">
+			<result name="success">IdeasList.jsp</result>
+	</action>
+		<action name="getIdeaTrackingPage" class="reportAction"
+			method="getIdeaTrackingPage">
+			<result name="success">trackIdea.jsp</result>
+	</action>
+		<action name="getChallengeTrackingPage" class="reportAction"
+			method="getChallengeTrackingPage">
+			<result name="success">trackChallenges.jsp</result>
+	</action>
+		<action name="getChallengePickPage" class="reportAction"
+			method="getChallengePickPage">
+			<result name="success">multiSelectEmployeeForChallenge.jsp</result>
+	</action>
+		<action name="getChallengePointsPage" class="reportAction"
+			method="getChallengePointsPage">
+			<result name="success">challengePoints.jsp</result>
+	</action>
+			<action name="getEmployeePage" class="reportAction"
+			method="getEmployeePage">
+			<result name="success">employeeList.jsp</result>
+	</action>
+	
+	<action name="setupPlant" class="loginAction"
+			method="setupPlant">
+			<result name="success">admintool_plant.jsp</result>
+			<result name="input">admintool_plant.jsp</result>
+			<result name="error">admintool_plant.jsp</result>
+			<result name="setupPlant">admintool_plant.jsp</result>
+	</action>
+	<action name="setupAspireValues" class="loginAction"
+			method="setupAspireValues">
+			<result name="success">admintool_aspire.jsp</result>
+			<result name="input">admintool_aspire.jsp</result>
+			<result name="error">admintool_aspire.jsp</result>
+			<result name="setupAspireValues">admintool_aspire.jsp</result>
+	</action>
+	<action name="setupCompany" class="loginAction"
+			method="setupCompany">
+			<result name="success">admintool_company.jsp</result>
+			<result name="input">admintool_company.jsp</result>
+			<result name="error">admintool_company.jsp</result>
+			<result name="setupCompany">admintool_company.jsp</result>
+	</action>
+		<action name="savePlant" class="editAction"
+			method="savePlant">
+			<result name="success">admintool_plant.jsp</result>
+			<result name="input">admintool_plant.jsp</result>
+			<result name="error">admintool_plant.jsp</result>
+			<result name="setupPlant">admintool_plant.jsp</result>
+	</action>
+	<action name="saveAspireValues" class="editAction"
+			method="saveAspireValues">
+			<result name="success">admintool_aspire.jsp</result>
+			<result name="input">admintool_aspire.jsp</result>
+			<result name="error">admintool_aspire.jsp</result>
+			<result name="setupAspireValues">admintool_aspire.jsp</result>
+	</action>
+	<action name="saveCompany" class="editAction"
+			method="saveCompany">
+			<result name="success">admintool_company.jsp</result>
+			<result name="input">admintool_company.jsp</result>
+			<result name="error">admintool_company.jsp</result>
+			<result name="setupCompany">admintool_company.jsp</result>
+	</action>
+	
+	
+	
+	</package>
+
+
+</struts>

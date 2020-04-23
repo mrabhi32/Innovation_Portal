@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.vgil.model.Manpower" table="MANPOWER_DATA"  lazy="false">
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Long">
+			<column name="ID" />
+			<generator class="identity" />
+		</id>
+		<property name="fs1" type="string">
+			<column name="FS1" length="50" />
+		</property>
+				<property name="fs2" type="string">
+			<column name="FS2" length="50" />
+		</property>
+		<property name="fs3" type="string">
+			<column name="FS3" length="50" />
+		</property>
+		<property name="innovattionStarter" type="string">
+			<column name="INNOVATOR_STARTERS" length="50" />
+		</property>
+		
+	</class>
+</hibernate-mapping>

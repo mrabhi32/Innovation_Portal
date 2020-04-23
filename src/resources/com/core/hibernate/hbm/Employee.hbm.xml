@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.vgil.model.Employee" table="EMP_MASTER"  lazy="false">
+		<cache usage="read-write"/>
+		<id name="user_id" type="string"  >
+			<column name="user_id" />
+			<generator class="assigned" />
+		</id>
+		<property name="serial_no" type="int">
+			<column name="serial_no" length="11" />
+		</property>
+		<property name="firstName" type="string">
+			<column name="first_name" length="15" />
+		</property>		
+		<property name="lastName" type="string">
+			<column name="last_name" length="15" />
+		</property>
+		<property name="emailID" type="string">
+			<column name="email_address" length="100" />
+		</property>
+		<property name="userRole" type="string">
+			<column name="user_role" length="20" />
+		</property>
+		<property name="contactNo" type="string">
+			<column name="contact_no" length="10" />
+		</property>
+		<property name="companyID" type="string">
+			<column name="company_id" length="20" />
+		</property>
+		<property name="plantID" type="string">
+			<column name="plant_id" length="20" />
+		</property>
+		<property name="departmentID" type="string">
+			<column name="department_id" length="20" />
+		</property>
+		<property name="designationID" type="string">
+			<column name="designation_id" length="20" />
+		</property>
+		<property name="capability" type="string">
+			<column name="capability" length="20" />
+		</property>
+		<property name="userStatus" type="string">
+			<column name="user_status" length="10" />
+		</property>
+		<property name="reasonForInactivation" type="string">
+			<column name="reason_for_inactivation" length="50" />
+		</property>
+		<property name="createdDate" type="java.sql.Timestamp">
+			<column name="created_date" />
+		</property>
+		<property name="createdBy" type="string">
+			<column name="created_by" length="10"/>
+		</property>
+		<property name="lastUpdatedDate" type="java.sql.Timestamp">
+			<column name="last_updated_date" />
+		</property>
+		<property name="lastUpdatedBy" type="string">
+			<column name="last_updated_by" length="10"/>
+		</property>
+
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.vgil.model.IdeaMaster" table="IDEA_MASTER" lazy="false">
+		<cache usage="read-write" />
+		<id name="serial_no" type="int">
+			<column name="serial_no" />
+			<generator class="identity" />
+		</id>
+		<property name="idea_id" type="string">
+			<column name="idea_id" length="10" />
+		</property>
+		<property name="user_id" type="string">
+			<column name="user_id" length="10" />
+		</property>
+		<property name="challenge_id" type="string">
+			<column name="challenge_id" length="10" />
+		</property>
+		<property name="frame" type="string">
+			<column name="frame" length="50" />
+		</property>
+		<property name="idea" type="string">
+			<column name="idea" length="500" />
+		</property>
+		<property name="document_uploaded" type="string">
+			<column name="document_uploaded" length="100" />
+		</property>
+		<property name="impact_value" type="string">
+			<column name="impact_value" length="10" />
+		</property>
+		<property name="investment_classification" type="string">
+			<column name="investment_classification" length="20" />
+		</property>
+		<property name="investment_value" type="string">
+			<column name="investment_value" length="10" />
+		</property>
+		<property name="implementation_time" type="int">
+			<column name="implementation_time" length="11" />
+		</property>
+		<property name="impact_level" type="string">
+			<column name="impact_level" length="10" />
+		</property>
+		<property name="unknowns" type="string">
+			<column name="unknowns" length="15" />
+		</property>
+		<property name="idea_priority" type="string">
+			<column name="idea_priority" length="10" />
+		</property>
+		<property name="idea_status" type="string">
+			<column name="idea_status" length="10" />
+		</property>
+		<property name="created_date" type="timestamp">
+			<column name="created_date" />
+		</property>
+		<property name="created_by" type="string">
+			<column name="created_by" length="10" />
+		</property>
+		<property name="last_updated_date" type="timestamp">
+			<column name="last_updated_date" />
+		</property>
+		<property name="last_updated_by" type="string">
+			<column name="last_updated_by" length="10" />
+		</property>
+
+	</class>
+</hibernate-mapping>

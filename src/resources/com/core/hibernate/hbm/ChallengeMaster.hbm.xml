@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.vgil.model.ChallengeMaster" table="CHALLENGE_MASTER" lazy="false">
+		<cache usage="read-write" />
+		<id name="challenge_id" type="string">
+			<column name="challenge_id" />
+			<generator class="assigned" />
+		</id>			
+		<property name="serial_no" type ="int">
+			<column name="serial_no" />
+		</property>
+		<property name="plant_id" type="string">
+			<column name="plant_id" length="15" />
+		</property>
+		<property name="company_id" type="string">
+			<column name="company_id" length="15" />
+		</property>
+		<property name="challenge_type" type="string">
+			<column name="challenge_type" length="30" />
+		</property>
+		<property name="challenge_category" type="string">
+			<column name="challenge_category" length="20" />
+		</property>
+		<property name="priority" type="string">
+			<column name="priority" length="10" />
+		</property>
+		<property name="challenge" type="string">
+			<column name="challenge" length="20" />
+		</property>
+		<property name="quant_meas_success" type="string">
+			<column name="quant_meas_success" length="20" />
+		</property>
+		<property name="challenge_start_date" type="timestamp">
+			<column name="challenge_start_date" />
+		</property>
+		<property name="challenge_end_date" type="timestamp">
+			<column name="challenge_end_date" />
+		</property>
+		<property name="challenge_status" type="string">
+			<column name="challenge_status" length="10" />
+		</property>
+		<property name="reason_for_drop" type="string">
+			<column name="reason_for_drop" length="30" />
+		</property>
+		<property name="created_date" type="timestamp">
+			<column name="created_date" />
+		</property>
+		<property name="created_by" type="string">
+			<column name="created_by" length="10" />
+		</property>
+		<property name="last_updated_date" type="timestamp">
+			<column name="last_updated_date" />
+		</property>
+		<property name="last_updated_by" type="string">
+			<column name="last_updated_by" length="10" />
+		</property>
+	</class>
+</hibernate-mapping>

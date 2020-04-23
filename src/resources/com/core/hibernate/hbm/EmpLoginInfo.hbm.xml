@@ -1,0 +1,35 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 20 Julai 2010 11:40:18 AM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+	<class name="com.vgil.model.EmpLoginInfo" table="emp_login_information"
+		lazy="false">
+		<cache usage="read-write" />
+
+		<id name="serial_no" type="int">
+			<column name="serial_no" />
+			<generator class="assigned" />
+		</id>
+		<property name="user_id" type="string">
+			<column name="user_id" length="10" />
+		</property>
+		<property name="userName" type="string">
+			<column name="username" length="100" />
+		</property>
+		<property name="password" type="string">
+			<column name="password" length="20" />
+		</property>
+		<property name="createdDate" type="java.sql.Timestamp">
+			<column name="created_date" />
+		</property>
+		<property name="createdBy" type="string">
+			<column name="created_by" length="10" />
+		</property>
+		<property name="lastUpdatedDate" type="java.sql.Timestamp">
+			<column name="last_updated_date" />
+		</property>
+		<property name="lastUpdatedBy" type="string">
+			<column name="last_updated_by" length="10" />
+		</property>
+	</class>
+</hibernate-mapping>

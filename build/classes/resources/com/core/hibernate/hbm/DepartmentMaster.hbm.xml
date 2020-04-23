@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.vgil.model.DepartmentMaster" table="DEPARTMENT_MASTER"
+		lazy="false">
+		<cache usage="read-write" />
+		<id name="department_id" type="string">
+			<column name="department_id"  length ="10"/>
+			<generator class="identity" />
+		</id>
+		
+		
+		<property name="serial_no" type ="int">
+			<column name="serial_no" />
+		</property>
+		
+		<property name="department_name" type="string">
+			<column name="department_name" length="50" />
+		</property>	
+		
+	</class>
+</hibernate-mapping>
