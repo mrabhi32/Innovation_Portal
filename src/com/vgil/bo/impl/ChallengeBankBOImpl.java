@@ -215,7 +215,7 @@ public class ChallengeBankBOImpl extends BaseAction implements ChallengeBankBO {
 					if(BLANKSPACE.equals(challengeString[6].trim())){
 						error = error + " Quantitative Measure of Success can not be empty. Error on line no "+lineCount+"."+LINESEPERATOR+"\n";
 					}
-					
+
 				}
 				lineCount++;
 			}
@@ -245,11 +245,11 @@ public class ChallengeBankBOImpl extends BaseAction implements ChallengeBankBO {
 		{
 			return VALIDATION_PASS;
 		}
-		
+
 		else
 			return VALIDATION_FAIL;
 
-		
+
 
 	}
 
@@ -623,7 +623,7 @@ public class ChallengeBankBOImpl extends BaseAction implements ChallengeBankBO {
 			throws Exception {
 		return challengeBankDAO.getChallengeIdeas(challengeNos);
 	}
-	
+
 	@Override
 	public List<ChallengeMaster> getChallengeBankListForCompany(
 			Employee employee) throws Exception {
@@ -655,31 +655,32 @@ public class ChallengeBankBOImpl extends BaseAction implements ChallengeBankBO {
 	}
 	@Override
 	public String saveOrUpdateChallenge(ChallengeMaster cm) {
-		
+
 		return challengeBankDAO.saveOrUpdateChallenge(cm);
 	}
 	public int getTeamLatestSerialno()
 	{
 		return challengeBankDAO.getTeamLatestSerialno();
 	}
-	
+
 	public int getMemberLatestSerialno()
 	{
 		return challengeBankDAO.getMemberLatestSerialno();
 	}
 	@Override
 	public boolean saveOrUpdateChallengeTeam(ChallengeTeam ct) {
-		
-		
+
+
 		return challengeBankDAO.saveOrUpdateChallengeTeam(ct);
-		
+
 	}
 	@Override
 	public boolean saveOrUpdateChallengeMembers(TeamMembers tm) {
-		
+
 		return challengeBankDAO.saveOrUpdateChallengeMembers(tm);
-		
+
 	}
 
 
 }
+

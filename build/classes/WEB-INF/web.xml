@@ -35,7 +35,7 @@
 		<url-pattern>/*</url-pattern>		
 	</filter-mapping>
 	<welcome-file-list>
-        <welcome-file>/apps/jsp/sign-in.jsp</welcome-file>
+        <welcome-file>/apps/jsp/Index.jsp</welcome-file>
     </welcome-file-list>
 <!-- Apache Shiro -->
 <!-- The filter-name matches name of a 'shiroFilter' bean inside applicationContext.xml -->
